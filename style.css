@@ -1,0 +1,50 @@
+.container {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.visualization {
+    margin-bottom: 40px;
+}
+
+.dropdown-container {
+    text-align: center;
+    margin: 10px auto;
+}
+
+.dropdown-container select {
+    margin: 5px;
+    padding: 5px;
+    display: inline-block; /* Align the dropdowns inline and center them */
+}
+.center-container {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.center-container select {
+    margin: 5px;
+    padding: 5px;
+    display: inline-block; /* Aligns the dropdown inline and allows it to be centered */
+}
+
+
+#vis1, #vis2, #vis3, #vis4, #vis5 {
+    margin: 20px auto;
+    height: 500px;
+}
+
+select, #button-container button {
+    margin: 10px;
+    padding: 5px;
+}
+
+h1, h2, h3 {
+    color: #253342; /* Adjust the color as needed */
+}
+
+p {
+    color: #4f5b66; /* Adjust the color as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+}
