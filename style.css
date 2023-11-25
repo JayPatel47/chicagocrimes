@@ -5,7 +5,7 @@
 }
 
 .visualization {
-    margin-bottom: 40px;
+    margin-bottom: 150px;
 }
 
 .dropdown-container {
@@ -44,7 +44,32 @@ h1, h2, h3 {
     color: #253342; /* Adjust the color as needed */
 }
 
+h1{
+    font-size: 50px;
+    text-decoration-line: underline;
+}
+
+h3{
+    font-size: 30px;
+}
+
 p {
     color: #4f5b66; /* Adjust the color as needed */
-    font-size: 16px; /* Adjust the font size as needed */
+    font-size: 18px; /* Adjust the font size as needed */
+}
+
+.navbar {
+    background-color: #253342;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4f5b66;
+    color: white;
+    border: none;
 }

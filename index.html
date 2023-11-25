@@ -1,3 +1,427 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vadapav Visualizers</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* 100% of the viewport height */
+        }
+
+        .top-half, .bottom-half {
+            display: flex;
+            flex: 1;
+            width: 100%;
+        }
+
+        .visualization {
+            flex: 1;
+            margin: 10px;
+            max-width: 80%; /* Adjust width to leave space between visualizations */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            /* max-width: 50%; Ensure the visualization doesn't exceed its container's width */
+            /* max-height: 50%; Ensure the visualization doesn't exceed its container's height */
+        }
+
+        .visualization h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-half">
+            <div class="visualization">
+                <h3>Crime Trend In Different Chicago Regions</h3>
+                <div id="vis1"></div>
+            </div>
+
+            <div class="visualization">
+                <h3>Crime Trend in Chicago Over Time</h3>
+                <div id="vis2"></div>
+            </div>
+        </div>
+
+        <div class="bottom-half">
+            <div class="visualization">
+                <h3>Ward and Year Specific Crime Analysis</h3>
+                <div class="dropdown-container">
+                    <label for="ward-dropdown">Select Ward:</label>
+                    <select id="ward-dropdown"></select>
+                    <label for="year-dropdown">Select Year:</label>
+                    <select id="year-dropdown"></select>
+                </div>
+                <div id="vis3"></div>
+            </div>
+
+            <div class="visualization">
+                <h3>Yearly Crime Location Overview</h3>
+                <div id="button-container"></div>
+                <div id="vis4"></div>
+            </div>
+        </div>
+
+        <div class="visualization">
+            <h3>Geospatial Analysis of Arrests</h3>
+            <div class="center-container">
+                <label for="year-dropdown-geo">Select Year:</label>
+                <select id="year-dropdown-geo"></select>
+            </div>
+            <div id="vis5"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> -->
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vadapav Visualizers</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #253342;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .navbar button:hover {
+            background-color: #4f5b66;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            /* margin: auto; */
+            text-align: center;
+        }
+
+        .visualization {
+            margin-bottom: 40px;
+            display: none; /* Hide all visualizations by default */
+        }
+
+        .dropdown-container {
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        .dropdown-container select {
+            margin: 5px;
+            padding: 5px;
+            display: inline-block; /* Align the dropdowns inline and center them */
+        }
+
+        .center-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .center-container select {
+            margin: 5px;
+            padding: 5px;
+            display: inline-block; /* Aligns the dropdown inline and allows it to be centered */
+        }
+
+        #vis1, #vis2, #vis3, #vis4, #vis5 {
+            height: 500px;
+            width: 100%;
+        }
+
+        select, #button-container button {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        h1, h2, h3 {
+            color: #253342; /* Adjust the color as needed */
+        }
+
+        p {
+            color: #4f5b66; /* Adjust the color as needed */
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="showInteractive()">Interactive</button>
+        <button onclick="showSpatial()">Spatial</button>
+    </div>
+
+    <div class="container">
+        <div class="top-half">
+            <div class="visualization" id="vis1">
+                <h3>Crime Trend In Different Chicago Regions</h3>
+                <div id="vis1"></div>
+            </div>
+
+            <div class="visualization" id="vis2">
+                <h3>Crime Trend in Chicago Over Time</h3>
+                <div id="vis2"></div>
+            </div>
+        </div>
+
+        <div class="bottom-half">
+            <div class="visualization" id="vis3">
+                <h3>Ward and Year Specific Crime Analysis</h3>
+                <div class="dropdown-container">
+                    <label for="ward-dropdown">Select Ward:</label>
+                    <select id="ward-dropdown"></select>
+                    <label for="year-dropdown">Select Year:</label>
+                    <select id="year-dropdown"></select>
+                </div>
+                <div id="vis3"></div>
+            </div>
+
+            <div class="visualization" id="vis4">
+                <h3>Yearly Crime Location Overview</h3>
+                <div id="button-container"></div>
+                <div id="vis4"></div>
+            </div>
+        </div>
+
+        <div class="visualization" id="vis5">
+            <h3>Geospatial Analysis of Arrests</h3>
+            <div class="center-container">
+                <label for="year-dropdown-geo">Select Year:</label>
+                <select id="year-dropdown-geo"></select>
+            </div>
+            <div id="vis5"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function showInteractive() {
+            document.getElementById("vis1").style.display = "block";
+            document.getElementById("vis2").style.display = "block";
+            document.getElementById("vis3").style.display = "block";
+            document.getElementById("vis4").style.display = "block";
+            document.getElementById("vis5").style.display = "none";
+        }
+
+        function showSpatial() {
+            document.getElementById("vis1").style.display = "none";
+            document.getElementById("vis2").style.display = "none";
+            document.getElementById("vis3").style.display = "none";
+            document.getElementById("vis4").style.display = "block";
+            document.getElementById("vis5").style.display = "block";
+        }
+        
+        // Initially show the Interactive visualizations
+        showInteractive();
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vadapav Visualizers</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #253342;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4f5b66;
+            color: white;
+            border: none;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .visualization {
+            margin-bottom: 40px;
+            margin-right: 35px; /* Adjusted to add space between visualizations */
+            display: none; /* Hide all visualizations by default */
+        }
+
+        .dropdown-container,
+        .center-container {
+            text-align: center;
+            margin: 10px auto;
+        }
+
+        .dropdown-container select,
+        .center-container select {
+            margin: 5px;
+            padding: 5px;
+            display: inline-block; /* Align the dropdowns inline and center them */
+        }
+
+        #vis1, #vis2, #vis3, #vis4, #vis5 {
+            height: 500px;
+            width: 100%;
+        }
+
+        select,
+        #button-container button {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        h1, h2, h3 {
+            color: #253342; /* Adjust the color as needed */
+        }
+
+        p {
+            color: #4f5b66; /* Adjust the color as needed */
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="showInteractive()">Interactive</button>
+        <button onclick="showSpatial()">Spatial</button>
+    </div>
+
+    <div class="container">
+        <h1>Chicago Crime Dataset Analysis</h1>
+        <h2> - by Vadapav Visualizers</h2>
+        <p>The Chicago Crime dataset contains reported crime that occurred from 2001 to present. It was extracted from the Chicago Police Department's CLEAR (Citizen Law Enforcement Analysis and Reporting) system. The dataset contains more than 1 million crimes reported from 2001 including many details about the Crimes with its case number, a brief description, when, where, and how it happened, as well as if the offender was arrested or not.</p>
+
+        <div class="visualization" id="vis1">
+            <h3>Crime Trend In Different Chicago Regions</h3>
+            <p>The following interactive scatter plot visualizes Chicago crime data, providing insights into the monthly crime trends in different regions of Chicago over the years.</p>
+            <div id="vis1"></div>
+        </div>
+
+        <div class="visualization" id="vis2">
+            <h3>Crime Trend in Chicago Over Time</h3>
+            <p>The following visualization is an interactive multi-view area chart that shows the crime count over any period that the user selects. </p>
+            <div id="vis2"></div>
+        </div>
+
+        <div class="visualization" id="vis3">
+            <h3>Ward and Year Specific Crime Analysis</h3>
+            <p>The following visualization is an interactive bar chart that shows the crime count for the top 10 crimes for the selected ward in the selected year.</p>
+            <div class="dropdown-container">
+                <label for="ward-dropdown">Select Ward:</label>
+                <select id="ward-dropdown"></select>
+                <label for="year-dropdown">Select Year:</label>
+                <select id="year-dropdown"></select>
+            </div>
+            <div id="vis3"></div>
+        </div>
+
+        <div class="visualization" id="vis4">
+            <h3>Yearly Crime Location Overview</h3>
+            <p>The following interactive visualization shows the top 5 crime locations by year with their counts.</p>
+            <div id="button-container"></div>
+            <div id="vis4"></div>
+        </div>
+
+        <div class="visualization" id="vis5">
+            <h3>Geospatial Analysis of Arrests</h3>
+            <p>The following visualization provides a comprehensive view of arrests in Chicago, combining geographic information with detailed data about each arrest.</p>
+            <div class="center-container">
+                <label for="year-dropdown-geo">Select Year:</label>
+                <select id="year-dropdown-geo"></select>
+            </div>
+            <div id="vis5"></div>
+        </div> 
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        function showInteractive() {
+            document.getElementById("vis1").style.display = "block";
+            // document.getElementById("vis2").style.display = "block";
+            // document.getElementById("vis3").style.display = "block";
+            // document.getElementById("vis4").style.display = "block";
+            // document.getElementById("vis5").style.display = "none";
+        }
+
+        function showSpatial() {
+            // document.getElementById("vis1").style.display = "none";
+            // document.getElementById("vis2").style.display = "none";
+            // document.getElementById("vis3").style.display = "none";
+            // document.getElementById("vis4").style.display = "none";
+            // document.getElementById("vis5").style.display = "block";
+        }
+        
+        // Initially show the Interactive visualizations
+        showInteractive();
+    </script>
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,26 +432,35 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Chicago Crime Dataset Analysis</h1>
-        <h2> - by Vadapav Visualizers</h2>
-        <p>The Chicago Crime dataset contains reported crime that occurred from 2001 to present. It was extracted from the Chicago Police Department's CLEAR (Citizen Law Enforcement Analysis and Reporting) system. The dataset contains more than 1 million crimes reported from 2001 including many details about the Crimes with its case number, a brief description, when, where, and how it happened, as well as if the offender was arrested or not.</p>
+    <div class="navbar">
+        <button onclick="showHome()">Home</button>
+        <button onclick="showInteractive()">Interactive</button>
+        <button onclick="showSpatial()">Spatial</button>
+    </div>
 
-        <div class="visualization">
+    <div class="container">
+        <div class="info" id = "intro">
+            <h1>Chicago Crime Dataset Analysis</h1>
+            <h2>by Vadapav Visualizers</h2>
+            <p>The Chicago Crime dataset contains reported crime that occurred from 2001 to present. It was extracted from the Chicago Police Department's CLEAR (Citizen Law Enforcement Analysis and Reporting) system. The dataset contains more than 1 million crimes reported from 2001 including many details about the Crimes with its case number, a brief description, when, where, and how it happened, as well as if the offender was arrested or not.</p>
+            <img src="data.png" width="1200" height="500"/>
+        </div>
+
+        <div class="visualization" id = "one">
             <h3>Crime Trend In Different Chicago Regions</h3>
             <p>The following interactive scatter plot visualizes Chicago crime data, providing insights into the monthly crime trends in different regions of Chicago over the years.</p>
             <p>Use the slider below the chart to interact and select the year.</p>
             <div id="vis1"></div>
         </div>
         
-        <div class="visualization">
+        <div class="visualization" id = "two">
             <h3>Crime Trend in Chicago Over Time</h3>
             <p>The following visualization is an interactive multi-view area chart that shows the crime count over any period that the user selects. </p>
             <p>You can select the timeframe in the bottom graph for which you want to see the visualization in the upper graph. The time frame can be day/days, week/weeks, month/months or year/years. </p>
             <div id="vis2"></div>
         </div>
 
-        <div class="visualization">
+        <div class="visualization" id = "three">
             <h3>Ward and Year Specific Crime Analysis</h3>
             <p>The following visualization is an interactive bar chart that shows the crime count for the top 10 crimes for the selected ward in the selected year.</p>
             <p>Select the Ward and/or Year from the dropdowns to see the visualization. You can also hover over the bars in the chart to see the Primary Type and exact Count.</p>
@@ -40,7 +473,7 @@
             <div id="vis3"></div>
         </div>
 
-        <div class="visualization">
+        <div class="visualization" id = "four">
             <h3>Yearly Crime Location Overview</h3>
             <p>The following interactive visualization shows the top 5 crime locations by year with their counts.</p>
             <p>Select the Year from following buttons to view the top 5 crime locations for that year and the Number of Crime Occurences in each location. You can also hover over the bars in the chart to see the Location and exact Count.</p>
@@ -48,7 +481,7 @@
             <div id="vis4"></div>
         </div>
 
-        <div class="visualization">
+        <div class="visualization" id = "five">
             <h3>Geospatial Analysis of Arrests</h3>
             <p>The following visualization provides a comprehensive view of arrests in Chicago, combining geographic information with detailed data about each arrest.</p>
             <p>You can select the year from dropdown to see the chicago map plot for that year. You can hover over the map to see the Type and Description of crime for each point on the graph.</p>
@@ -61,5 +494,36 @@
     </div>
     
     <script src="script.js"></script>
+    <script>
+        function showHome(){
+            document.getElementById("intro").style.display = "block";
+            document.getElementById("one").style.display = "none";
+            document.getElementById("two").style.display = "none";
+            document.getElementById("three").style.display = "none";
+            document.getElementById("four").style.display = "none";
+            document.getElementById("five").style.display = "none";
+        }
+
+        function showInteractive() {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("one").style.display = "block";
+            document.getElementById("two").style.display = "block";
+            document.getElementById("three").style.display = "block";
+            document.getElementById("four").style.display = "block";
+            document.getElementById("five").style.display = "none";
+        }
+
+        function showSpatial() {
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("one").style.display = "none";
+            document.getElementById("two").style.display = "none";
+            document.getElementById("three").style.display = "none";
+            document.getElementById("four").style.display = "none";
+            document.getElementById("five").style.display = "block";
+        }
+        
+        // Initially show the Interactive visualizations
+        showHome();
+    </script>
 </body>
 </html>
