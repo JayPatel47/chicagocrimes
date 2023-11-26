@@ -96,8 +96,8 @@ const vis2Spec = {
 };
 
 // Load and create visualizations
-createVisualization('#vis1', vis1Spec, 'data/crimes_by_regions.json');
-createVisualization('#vis2', vis2Spec, 'data/overview_crimes.json');
+createVisualization('#vis1', vis1Spec, 'crimes_by_regions.json');
+createVisualization('#vis2', vis2Spec, 'overview_crimes.json');
 
 
 // Populate the ward and year dropdowns for vis3
@@ -124,7 +124,7 @@ years.forEach(year => {
 function updateVis3() {
     const selectedWard = wardDropdown.value;
     const selectedYear = yearDropdown.value;
-    fetch(`data/ward_top_crimes_${selectedWard}_${selectedYear}.json`)
+    fetch(`ward_top_crimes_${selectedWard}_${selectedYear}.json`)
     .then(response => response.json())
     .then(data => {
         const vis3Spec = {
@@ -132,6 +132,8 @@ function updateVis3() {
             "mark": "bar",
             // Vega-Lite specification for vis3
             "data": {"values": data},
+            "width": 800,
+            "height": 400,
             "encoding": {
                 "x": {"field": "Primary Type", "type": "nominal", "sort": "-y"},
                 "y": {"field": "Count", "type": "quantitative"},
@@ -157,7 +159,7 @@ years.forEach(year => {
 });
 
 function updateVis4(selectedYear) {
-    fetch(`data/location_counts_${selectedYear}.json`)
+    fetch(`location_counts_${selectedYear}.json`)
     .then(response => response.json())
     .then(data => {
         const vis4Spec = {
@@ -248,7 +250,7 @@ for (let year = 2001; year <= 2023; year++) {  // Adjusted to include 2023
 
 // Function to update Visualization 5 based on the selected year
 function updateVis5(selectedYear) {
-    createGeoVisualization('#vis5', 'data/Boundaries.geojson', `data/crimes_data_${selectedYear}.json`, vis5Spec);
+    createGeoVisualization('#vis5', 'Boundaries.geojson', `crimes_data_${selectedYear}.json`, vis5Spec);
 }
 
 // Initial load of Visualization 5
