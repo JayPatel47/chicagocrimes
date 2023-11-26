@@ -132,13 +132,12 @@ function updateLinkedView(crimeType, selectedWard, selectedYear) {
             "mark": "bar",
             "encoding": {
             "x": {"field": "Hour", "type": "ordinal", "title": "Hour of Day"},
-            "y": {"field": "Number of Occurrences", "type": "quantitative", "title":
-            "Number of Occurrences"},
-            "color": {"field": "Crime Type", "type": "nominal", "title": "CrimeType"}
+            "y": {"field": "Count", "type": "quantitative", "title": "Number of Occurrences"},
+            //"color": {"field": crimeType, "type": "nominal", "title": "Crime Type"}
             },
             "tooltip": [{"field": "Crime Type", "type": "nominal"}, {"field":
-            "Number of Occurrences", "type": "quantitative"}],
-            "title": "Distribution of Top 5 Crime Types by Time of Day (Stacked Bar Chart)"
+            "Count", "type": "quantitative"}],
+            "title": "Total cases of " +crimeType+ " by Hour of the Day"
         }
         vegaEmbed('#linkedVis', linkedVisSpec);
     })
