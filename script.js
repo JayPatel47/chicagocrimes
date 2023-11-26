@@ -120,6 +120,35 @@ years.forEach(year => {
     yearDropdown.appendChild(option);
 });
 
+const stacked_bar_chart_spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"values": data},
+    "mark": "bar",
+    "encoding": {
+    "x": {"field": "Hour", "type": "ordinal", "title": "Hour of Day"},
+    "y": {"field": "Number of Occurrences", "type": "quantitative", "title":
+    "Number of Occurrences"},
+    "color": {"field": "Crime Type", "type": "nominal", "title": "CrimeType"}
+    },
+    "tooltip": [{"field": "Crime Type", "type": "nominal"}, {"field":
+    "Number of Occurrences", "type": "quantitative"}],
+    "title": "Distribution of Top 5 Crime Types by Time of Day (Stacked Bar Chart)"
+    };
+
+// Function to update the linked view visualization
+function updateLinkedView(crimeType, selectedWard, selectedYear) {
+    // Fetch data for the selected crime type
+    fetch(`data/hourly_crimes_ward_${selectedWard}_year_${selectedYear}_${crimeType.replace(' ', '_')}.json`)
+    .then(response => response.json())
+    .then(data => {
+        const linkedVisSpec = stacked_bar_chart_spec;
+        linkedVisSpec.data.values = data;
+
+        vegaEmbed('#linkedVis', linkedVisSpec);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 // Function to update Visualization 3
 function updateVis3() {
     const selectedWard = wardDropdown.value;
@@ -139,9 +168,18 @@ function updateVis3() {
                 "y": {"field": "Count", "type": "quantitative"},
                 "tooltip": [{"field": "Primary Type", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
             },
-            "config": {"view": {"stroke": ""}}
+            "config": {"view": {"stroke": ""}},
+            "selection": {
+                "barSelect": {"type": "single", "encodings": ["x"], "on": "click"}
+            }
         };
-        vegaEmbed('#vis3', vis3Spec);
+        vegaEmbed('#vis3', vis3Spec).then((res) => {
+            res.view.addEventListener('click', function(event, item) {
+                if (item && item.datum) {
+                    updateLinkedView(item.datum["Primary Type"], selectedWard, selectedYear);
+                }
+            });
+        });
     })
     .catch(error => console.error('Error:', error));
 }
