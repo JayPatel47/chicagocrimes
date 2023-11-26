@@ -120,30 +120,26 @@ years.forEach(year => {
     yearDropdown.appendChild(option);
 });
 
-const stacked_bar_chart_spec = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {"values": data},
-    "mark": "bar",
-    "encoding": {
-    "x": {"field": "Hour", "type": "ordinal", "title": "Hour of Day"},
-    "y": {"field": "Number of Occurrences", "type": "quantitative", "title":
-    "Number of Occurrences"},
-    "color": {"field": "Crime Type", "type": "nominal", "title": "CrimeType"}
-    },
-    "tooltip": [{"field": "Crime Type", "type": "nominal"}, {"field":
-    "Number of Occurrences", "type": "quantitative"}],
-    "title": "Distribution of Top 5 Crime Types by Time of Day (Stacked Bar Chart)"
-    };
-
 // Function to update the linked view visualization
 function updateLinkedView(crimeType, selectedWard, selectedYear) {
     // Fetch data for the selected crime type
     fetch(`data/hourly_crimes_ward_${selectedWard}_year_${selectedYear}_${crimeType.replace(' ', '_')}.json`)
     .then(response => response.json())
     .then(data => {
-        const linkedVisSpec = stacked_bar_chart_spec;
-        linkedVisSpec.data.values = data;
-
+        const linkedVisSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {"values": data},
+            "mark": "bar",
+            "encoding": {
+            "x": {"field": "Hour", "type": "ordinal", "title": "Hour of Day"},
+            "y": {"field": "Number of Occurrences", "type": "quantitative", "title":
+            "Number of Occurrences"},
+            "color": {"field": "Crime Type", "type": "nominal", "title": "CrimeType"}
+            },
+            "tooltip": [{"field": "Crime Type", "type": "nominal"}, {"field":
+            "Number of Occurrences", "type": "quantitative"}],
+            "title": "Distribution of Top 5 Crime Types by Time of Day (Stacked Bar Chart)"
+        }
         vegaEmbed('#linkedVis', linkedVisSpec);
     })
     .catch(error => console.error('Error:', error));
