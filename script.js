@@ -122,8 +122,9 @@ years.forEach(year => {
 
 // Function to update the linked view visualization
 function updateLinkedView(crimeType, selectedWard, selectedYear) {
+    const formattedCrimeType = crimeType.replace(/ /g, "_");
     // Fetch data for the selected crime type
-    fetch(`data/hourly_crimes_ward_${selectedWard}.0_year_${selectedYear}_${crimeType.replace(" ", "_")}.json`)
+    fetch(`data/hourly_crimes_ward_${selectedWard}.0_year_${selectedYear}_${formattedCrimeType}.json`)
     .then(response => response.json())
     .then(data => {
         const linkedVisSpec = {
