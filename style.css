@@ -30,7 +30,7 @@
 }
 
 
-#vis1, #vis2, #vis3, #vis4, #vis5 {
+#vis1, #vis2, #vis3, #linkedVis #vis4, #vis5 {
     margin: 20px auto;
     height: 500px;
 }
@@ -40,6 +40,14 @@
     grid-template-columns: 1fr 1fr;
     align-items: start;
 }
+
+#vis3 {
+    margin-bottom: 10px;
+  }
+  
+  #linkedVis {
+    margin-top: 16px;
+  }
 
 select, #button-container button {
     margin: 10px;
