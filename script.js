@@ -307,3 +307,111 @@ updateVis5(yearDropdownGeo.value);
 yearDropdownGeo.addEventListener('change', () => {
     updateVis5(yearDropdownGeo.value);
 });
+// ****************************************************************************
+
+// Create buttons and update function for vis6
+const buttonContainer2 = document.getElementById('spatial-button-container');
+years.forEach(year => {
+    let button = document.createElement('button');
+    button.textContent = year;
+    button.onclick = () => updateVis6(year);
+    buttonContainer2.appendChild(button);
+});
+
+function updateVis6(selectedYear) {
+    fetch(`data/location_counts_${selectedYear}.json`)
+    .then(response => response.json())
+    .then(data => {
+        const vis6Spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "mark": "bar",
+            // Vega-Lite specification for vis4
+            "data": {"values": data},
+            "width": 500,
+            "height": 500,
+            "encoding": {
+                "x": {"field": "Location Description", "type": "nominal"},
+                "y": {"field": "Count", "type": "quantitative"},
+                "column": {"field": "Date:O", "title": "Year"},
+                "tooltip": [{"field": "Location Description", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
+                "color": {"field": "Location Description", "type": "nominal"},
+            },
+            "title": "Top 5 Location Descriptions by Count (Grouped Bar Chart)",
+            "config": {"view": {"stroke": ""}, "axis": {"labelAngle": 0}},
+        };
+        vegaEmbed('#vis6', vis6Spec).then((res) => {
+            res.view.addEventListener('click', function(event, item) {
+                if (item && item.datum) {
+                    let locationType = item.datum["Location Description"];
+                    updateVis7(selectedYear, locationType);
+                }
+            });
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function createGeoVisualization2(container, geoJsonFile, crimeData, spec) {
+    fetch(geoJsonFile).then(response => response.json())
+        .then(geoData => {
+        const fullSpec = {
+        ...spec,
+        layer: [
+            { ...spec.layer[0], data: { values: geoData }},
+            { ...spec.layer[1], data: { values: crimeData }} // Using crimeData directly
+        ]
+        };
+        vegaEmbed(container, fullSpec);
+    })
+    .catch(error => console.error('Error:', error));
+ }
+
+ // Vega-Lite specification for Visualization 7
+const vis7Spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+    "width": 500,
+    "height": 500,
+    "title": "Crime Location",
+    "layer": [
+        {
+            "projection": {"type": "mercator"},
+            "mark": {
+                "type": "geoshape",
+                "fill": "#253342",
+                "stroke": "white",
+                "strokeWidth": 0.8
+            }
+        },
+        {
+            "mark": {
+                "type": "circle",
+                "size": 4,
+                "color": "#CCFF00",
+                "opacity": 0.9
+            },
+            "encoding": {
+                "longitude": {"field": "Longitude", "type": "quantitative"},
+                "latitude": {"field": "Latitude", "type": "quantitative"},
+                "tooltip": [
+                    {"field": "Primary Type", "title": "Primary Type"},
+                    {"field": "Description", "title": "Description"}
+                ]
+            }
+        }
+    ]
+};
+
+// Function to update Visualization 5 based on the selected year
+function updateVis7(selectedYear, filterLocationType = null) {
+    fetch(`data/crimes_data_${selectedYear}.json`)
+        .then(response => response.json())
+        .then(data => {
+            if (filterLocationType) {
+                data = data.filter(d => d["Location Description"] === filterLocationType);
+            }
+            createGeoVisualization2('#vis7', 'data/Boundaries.geojson', data, vis7Spec);
+        });
+}
+
+// Initial load of Visualization 5
+updateVis7(yearDropdownGeo.value);

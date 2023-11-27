@@ -72,6 +72,18 @@
             </div>
             <div id="vis5"></div>
         </div> 
+
+        <div class="visualization" id = "six">
+            <h3>Geospatial Analysis of Crime Locations</h3>
+            <p>The following interactive visualization shows the top 5 crime locations by year with their counts.</p>
+            <p>Select the Year from following buttons to view the top 5 crime locations for that year and the Number of Crime Occurences in each location. You can also hover over the bars in the chart to see the Location and exact Count.</p>
+            <p>Click on the bar to know the locations of crime occurance on the map of Chicago.</p>
+            <div id="spatial-button-container"></div>
+            <div id="spatial-linked">
+                <div id="vis6" class="visualization"></div>
+                <div id="vis7" class="visualization"></div>
+            </div>
+        </div>
     </div>
     
     <script src="script.js"></script>
@@ -83,6 +95,7 @@
             document.getElementById("three").style.display = "none";
             document.getElementById("four").style.display = "none";
             document.getElementById("five").style.display = "none";
+            document.getElementById("six").style.display = "none";
         }
 
         function showInteractive() {
@@ -92,6 +105,7 @@
             document.getElementById("three").style.display = "block";
             document.getElementById("four").style.display = "block";
             document.getElementById("five").style.display = "none";
+            document.getElementById("six").style.display = "none";
         }
 
         function showSpatial() {
@@ -101,6 +115,7 @@
             document.getElementById("three").style.display = "none";
             document.getElementById("four").style.display = "none";
             document.getElementById("five").style.display = "block";
+            document.getElementById("six").style.display = "block";
         }
         
         // Initially show the Interactive visualizations
