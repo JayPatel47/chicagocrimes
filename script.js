@@ -131,10 +131,16 @@ function updateLinkedView(crimeType, selectedWard, selectedYear) {
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "data": {"values": data},
             "mark": "bar",
+            "width": 500,
+            "height": 500,
             "encoding": {
             "x": {"field": "Hour", "type": "ordinal", "title": "Hour of Day"},
             "y": {"field": "Count", "type": "quantitative", "title": "Number of Occurrences"},
-            //"color": {"field": crimeType, "type": "nominal", "title": "Crime Type"}
+            "color": {
+                "field": "Count",
+                "type": "quantitative",
+                "scale": { "scheme": "yellowgreen"}
+              },
             },
             "tooltip": [{"field": "Crime Type", "type": "nominal"}, {"field":
             "Count", "type": "quantitative"}],
@@ -155,16 +161,22 @@ function updateVis3() {
         const vis3Spec = {
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "mark": "bar",
-            "width": 800,
-            "height": 400,
+            "width": 500,
+            "height": 500,
             // Vega-Lite specification for vis3
             "data": {"values": data},
             "encoding": {
                 "x": {"field": "Primary Type", "type": "nominal", "sort": "-y"},
                 "y": {"field": "Count", "type": "quantitative"},
+                "color": {
+                    "field": "Count",
+                    "type": "quantitative",
+                    "scale":{ "scheme": "yelloworangered"}
+                  },
                 "tooltip": [{"field": "Primary Type", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
             },
             "config": {"view": {"stroke": ""}},
+            "title": "Crime counts of top 10 crime types",
             "selection": {
                 "barSelect": {"type": "single", "encodings": ["x"], "on": "click"}
             }

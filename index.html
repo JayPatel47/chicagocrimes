@@ -37,20 +37,20 @@
         </div>
 
         <div class="visualization" id = "three">
-            <h3>Ward and Year Specific Crime Analysis</h3>
+            <h3>Ward and Year Specific Crime Analysis &</h3>
+            <h3>Hourly Crime Distribution for Selected Crime Type</h3>
             <p>The following visualization is an interactive bar chart that shows the crime count for the top 10 crimes for the selected ward in the selected year.</p>
             <p>Select the Ward and/or Year from the dropdowns to see the visualization. You can also hover over the bars in the chart to see the Primary Type and exact Count.</p>
+            <p>The second visualization shows the distribution of crimes by hour of the day for the crime type selected in the chart by clicking on the bar.</p>
             <div class="dropdown-container">
                 <label for="ward-dropdown">Select Ward:</label>
                 <select id="ward-dropdown"></select>
                 <label for="year-dropdown">Select Year:</label>
                 <select id="year-dropdown"></select>
             </div>
-            <div id="vis3"></div>
-            <div class="visualization" id="linkedVisContainer">
-                <h3>Hourly Crime Distribution for Selected Crime Type</h3>
-                <p>This visualization shows the distribution of crimes by hour of the day for the crime type selected in the above chart.</p>
-                <div id="linkedVis"></div>
+            <div id="linked-view-container">
+                <div id="vis3" class="visualization"></div>
+                <div id="linkedVis" class="visualization"></div>
             </div>
         </div>
 

@@ -35,6 +35,12 @@
     height: 500px;
 }
 
+#linked-view-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+}
+
 select, #button-container button {
     margin: 10px;
     padding: 5px;
