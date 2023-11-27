@@ -1,1 +1,1 @@
-# chicagocrimes.github.io
+# jaypatel47.github.io/chicagocrimes/
