@@ -196,6 +196,9 @@ function updateVis3() {
 wardDropdown.addEventListener('change', updateVis3);
 yearDropdown.addEventListener('change', updateVis3);
 
+// Initial load of Visualization 4
+updateVis4(2001);
+
 // Create buttons and update function for vis4
 const buttonContainer = document.getElementById('button-container');
 years.forEach(year => {
@@ -308,6 +311,9 @@ yearDropdownGeo.addEventListener('change', () => {
     updateVis5(yearDropdownGeo.value);
 });
 // ****************************************************************************
+
+// Initial load of Visualization 6
+updateVis6(2001);
 
 // Create buttons and update function for vis6
 const buttonContainer2 = document.getElementById('spatial-button-container');
