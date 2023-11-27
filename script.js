@@ -413,7 +413,7 @@ function updateVis7(selectedYear, filterLocationType = null) {
         .then(response => response.json())
         .then(data => {
             if (filterLocationType) {
-                data = data.filter(d => d["Location Description"] === filterLocationType);
+                data = data.filter(d => d["Location Description"] === filterLocationType && d["Arrest"] === true);
             }
             createGeoVisualization2('#vis7', 'data/Boundaries.geojson', data, vis7Spec);
         });
