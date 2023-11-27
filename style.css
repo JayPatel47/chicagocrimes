@@ -26,7 +26,7 @@
 .center-container select {
     margin: 5px;
     padding: 5px;
-    display: inline-block; /* Aligns the dropdown inline and allows it to be centered */
+    display: inline-block;
 }
 
 
@@ -55,7 +55,7 @@ select, #button-container button {
 }
 
 h1, h2, h3 {
-    color: #253342; /* Adjust the color as needed */
+    color: #253342;
 }
 
 h1{
@@ -68,8 +68,8 @@ h3{
 }
 
 p {
-    color: #4f5b66; /* Adjust the color as needed */
-    font-size: 18px; /* Adjust the font size as needed */
+    color: #4f5b66;
+    font-size: 18px;
 }
 
 .navbar {

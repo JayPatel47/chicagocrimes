@@ -64,6 +64,7 @@ const vis1Spec = {
 const vis2Spec = {
     "vconcat": [{
         "width": 800,
+        "height": 300,
         "mark": "area",
         "encoding": {
             "x": {
