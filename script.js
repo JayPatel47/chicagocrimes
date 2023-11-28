@@ -226,7 +226,7 @@ function updateVis4(selectedYear) {
                 "tooltip": [{"field": "Location Description", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
                 "color": {"field": "Location Description", "type": "nominal"},
             },
-            "title": "Top 5 Location Descriptions by Count (Grouped Bar Chart)",
+            "title": "Top 5 Location Descriptions by Count",
             "config": {"view": {"stroke": ""}, "axis": {"labelAngle": 0}},
         };
         vegaEmbed('#vis4', vis4Spec);
