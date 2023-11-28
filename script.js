@@ -222,7 +222,6 @@ function updateVis4(selectedYear) {
             "encoding": {
                 "x": {"field": "Location Description", "type": "nominal"},
                 "y": {"field": "Count", "type": "quantitative"},
-                "column": {"title": "Year "+selectedYear},
                 "tooltip": [{"field": "Location Description", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
                 "color": {"field": "Location Description", "type": "nominal"},
             },
@@ -338,7 +337,6 @@ function updateVis6(selectedYear) {
             "encoding": {
                 "x": {"field": "Location Description", "type": "nominal"},
                 "y": {"field": "Count", "type": "quantitative"},
-                "column": {"title": "Year "+selectedYear},
                 "tooltip": [{"field": "Location Description", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
                 "color": {"field": "Location Description", "type": "nominal"},
             },
