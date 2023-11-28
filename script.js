@@ -222,7 +222,7 @@ function updateVis4(selectedYear) {
             "encoding": {
                 "x": {"field": "Location Description", "type": "nominal"},
                 "y": {"field": "Count", "type": "quantitative"},
-                "column": {"field": "Date:O", "title": "Year"},
+                "column": {"title": "Year "+selectedYear},
                 "tooltip": [{"field": "Location Description", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
                 "color": {"field": "Location Description", "type": "nominal"},
             },
@@ -338,11 +338,11 @@ function updateVis6(selectedYear) {
             "encoding": {
                 "x": {"field": "Location Description", "type": "nominal"},
                 "y": {"field": "Count", "type": "quantitative"},
-                "column": {"field": "Date:O", "title": "Year"},
+                "column": {"title": "Year "+selectedYear},
                 "tooltip": [{"field": "Location Description", "type": "nominal"}, {"field": "Count", "type": "quantitative"}],
                 "color": {"field": "Location Description", "type": "nominal"},
             },
-            "title": "Top 5 Location Descriptions by Count (Grouped Bar Chart)",
+            "title": "Top 5 Location Descriptions by Count",
             "config": {"view": {"stroke": ""}, "axis": {"labelAngle": 0}},
         };
         vegaEmbed('#vis6', vis6Spec).then((res) => {
